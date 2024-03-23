@@ -25,5 +25,13 @@ public interface SaleRepository extends JpaRepository<SaleModel, Long> {
     Map<String,Integer> sumOfTotalRemaining(String companyName);
     @Query("select s from SaleModel s where customerName = ?1 and date = ?2")
     List<SaleModel> findByNameAndDate(String name, LocalDate date);
+    @Query("select sum(s.totalAmmount) as summOfTotalAmmount from SaleModel s where (month(s.date) = ?1 and year(s.date) = ?4 and companyName=?5) or (month(s.date) = ?2 and year(s.date) = ?4 and companyName=?5) or (month(s.date) = ?3 and year(s.date) = ?4  and companyName=?5)")
+   int sumOfTotalAmountOfQuarter(int month1,int month2,int month3,int year,String companyName);
+
+    @Query("select sum(s.totalAmmount) as summOfTotalAmmount from SaleModel s where (month(s.date) = ?1 and year(s.date) = ?2 and companyName=?3)")
+    int sumOfTotalAmountOfMonth(int month1,int year,String companyName);
+
+    @Query("SELECT MIN(s.date) FROM SaleModel s WHERE s.companyName = ?1")
+    LocalDate findMinDate(String companyName);
 
 }

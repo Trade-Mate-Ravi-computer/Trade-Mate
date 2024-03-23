@@ -23,6 +23,7 @@ public class CompanyController {
 
     @PostMapping("/add")
     public ResponseEntity<CompanyModel> addCompany( @RequestBody CompanyModel company){
+        company.setCompanyName(company.getCompanyName().trim());
         company.getUser().setId(userService.getByEmail(company.getEmail()).getId());
         return companyService.adddCompany(company);
     }
@@ -35,6 +36,10 @@ public class CompanyController {
     public List<CompanyModel> getByUserId(@PathVariable String email){
         UserModel user = userService.getByEmail(email);
         return companyService.getByUserId(user.getId());
+    }
+    @PostMapping("/byname/{name}")
+    public CompanyModel getByName(@PathVariable String name){
+        return companyService.getByName(name);
     }
     @PutMapping("/update")
     public String updateCompany(@RequestBody CompanyModel company){

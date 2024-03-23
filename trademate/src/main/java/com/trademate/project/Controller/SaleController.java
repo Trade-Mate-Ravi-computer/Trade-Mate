@@ -1,6 +1,8 @@
 package com.trademate.project.Controller;
 
 import com.trademate.project.Model.DateModel;
+import com.trademate.project.Model.MonthYearModel;
+import com.trademate.project.Model.QuarterMonthModel;
 import com.trademate.project.Model.SaleModel;
 import com.trademate.project.Repository.SaleRepository;
 import com.trademate.project.Service.CompanyService;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -83,5 +86,17 @@ public class SaleController {
     @PostMapping("/byid/{id}")
     public List<SaleModel> findById(@PathVariable long id){
         return saleService.grtById(id);
+    }
+    @PostMapping("/quart")
+    public int totalAmountOfQuarter(@RequestBody QuarterMonthModel quarterMonthModel){
+        return saleService.totalAmmountOfQuarter(quarterMonthModel);
+    }
+    @PostMapping("/monthsum")
+    public  int totalAmmountOfMonth(@RequestBody MonthYearModel monthYearModel){
+        return saleService.totalAmmountOfMonth(monthYearModel);
+    }
+    @GetMapping("/date/{companyName}")
+    public LocalDate getMinDate(@PathVariable String companyName){
+        return saleRepository.findMinDate(companyName);
     }
 }

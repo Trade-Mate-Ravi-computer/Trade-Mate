@@ -1,5 +1,7 @@
 package com.trademate.project.Service;
 
+import com.trademate.project.Model.MonthYearModel;
+import com.trademate.project.Model.QuarterMonthModel;
 import com.trademate.project.Model.SaleModel;
 import com.trademate.project.Repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +61,13 @@ public class SaleService {
     public List<SaleModel> grtById(long id){
        SaleModel sale = saleRepository.findById(id).orElseThrow(()->new UsernameNotFoundException("Not Found"));
         return saleRepository.findByNameAndDate(sale.getCustomerName(),sale.getDate());
+    }
+    public  int totalAmmountOfQuarter(QuarterMonthModel monthModel){
+        System.out.println(monthModel.getMonth1()+","+monthModel.getYear()+","+monthModel.getCompanyName());
+        return saleRepository.sumOfTotalAmountOfQuarter(monthModel.getMonth1(),monthModel.getMonth2(),monthModel.getMonth3(),monthModel.getYear(),monthModel.getCompanyName());
+    }
+    public int totalAmmountOfMonth(MonthYearModel monthModel){
+        System.out.println(monthModel.getMonth()+","+monthModel.getYear()+","+monthModel.getCompanyName());
+        return saleRepository.sumOfTotalAmountOfMonth(monthModel.getMonth(),monthModel.getYear(),monthModel.getCompanyName());
     }
 }

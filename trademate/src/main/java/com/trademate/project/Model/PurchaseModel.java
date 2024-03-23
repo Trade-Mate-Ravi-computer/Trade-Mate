@@ -28,6 +28,7 @@ public class PurchaseModel {
     private int paidAmmount;
     private int remaining;
     private String companyName;
+    private String sellerName;
     @ManyToOne
     private StockItemModel item;
     @ManyToOne

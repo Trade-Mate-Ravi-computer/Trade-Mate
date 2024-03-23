@@ -22,4 +22,7 @@ public class PurchaseService {
     public List<PurchaseModel> getByCompanyName(String companyName){
         return purchaseRepository.findAllByCompanyName(companyName);
     }
+    public PurchaseModel getById(long id){
+        return purchaseRepository.findById(id);
+    }
 }
