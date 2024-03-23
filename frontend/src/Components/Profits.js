@@ -18,19 +18,16 @@ function Profits() {
         companyName: JSON.parse(localStorage.getItem('companyName')).companyName
     });
 
-    const monthInLetter = changeNumberToMonth(currentMonth);
+    const monthInLetter = changeNumberToMonth(dateState.month);
 
-    function changeNumberToMonth(currentMonth) {
+    function changeNumberToMonth(months) {
         let month = "";
-        switch (currentMonth) {
-            case 0:
-                month = "January";
-                break;
+        switch (months) {
             case 1:
-                month = "February";
+                month = "January";
                 break;
             case 2:
-                month = "January";
+                month = "February";
                 break;
             case 3:
                 month = "March";
